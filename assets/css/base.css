@@ -73,3 +73,14 @@ body{
     position: relative;
     z-index: 1;
 }
+
+.padding-0 > *{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.l-2-4 {
+    display: block;
+    flex: 0 0 20%;
+    max-width: 20%;
+}
