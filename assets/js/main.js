@@ -25,17 +25,18 @@
 // slider rooms suites
 (function(){
     const prevBtn = document.querySelector('.content__rooms-btn-prev');
+    const prevBtnText = document.querySelector('.content__rooms-btn-prev p');
     const nextBtn = document.querySelector('.content__rooms-btn-next');
+    const nextBtnText = document.querySelector('.content__rooms-btn-next p');
     const contentItems = document.querySelectorAll('.content__rooms-wrap-item');
-    const wrapItem = document.querySelector('.content__rooms-wrap-items');
-    let myItems = [];
-    let width = contentItems[0].clientWidth;
-    let translateX = 0;
+    const contentItemsText = document.querySelectorAll('.content__rooms-wrap-desc-title a');
     let count = 0;
     if(contentItems){
-        for(var i=0; i<contentItems.length; i++){
-            myItems.push(contentItems[i]);
-        }
+        contentItems[0].classList.add('active')
+        contentItems[1].classList.add('right')
+        contentItems[contentItems.length - 1].classList.add('left');
+        prevBtnText.innerText = contentItemsText[contentItemsText.length - 1].innerText;
+        nextBtnText.innerText = contentItemsText[1].innerText;
         nextBtn.addEventListener('click', function(){
             handleSlider(1)
         });
@@ -45,12 +46,32 @@
         function handleSlider(condition){
             if(condition === 1){
                 // next
-                translateX = translateX - width;
-                wrapItem.style = `transform: translateX(${translateX}px);`;
+                count++;
+                if (count >= contentItems.length) {
+                    count = 0;
+                }
+                document.querySelector('.content__rooms-wrap-item.active').classList.remove('active');
+                document.querySelector('.content__rooms-wrap-item.left').classList.remove('left');
+                document.querySelector('.content__rooms-wrap-item.right').classList.remove('right');
+                contentItems[count].classList.add('active')
+                contentItems[count + 1 >= contentItems.length ? 0 : count + 1].classList.add('right');
+                contentItems[count - 1 < 0 ? contentItems.length - 1 : count - 1].classList.add('left');
+                nextBtnText.innerText = contentItemsText[count + 1 >= contentItemsText.length ? 0 : count + 1].innerText;
+                prevBtnText.innerText = contentItemsText[count - 1 < 0 ? contentItemsText.length - 1 : count - 1].innerText;
             }else if(condition === -1){
                 // prev
-                translateX = translateX + width;
-                wrapItem.style = `transform: translateX(${translateX}px);`;
+                count--;
+                if (count < 0) {
+                    count = contentItems.length - 1;
+                }
+                document.querySelector('.content__rooms-wrap-item.active').classList.remove('active');
+                document.querySelector('.content__rooms-wrap-item.left').classList.remove('left');
+                document.querySelector('.content__rooms-wrap-item.right').classList.remove('right');
+                contentItems[count].classList.add('active')
+                contentItems[count + 1 >= contentItems.length ? 0 : count + 1].classList.add('right');
+                contentItems[count - 1 < 0 ? contentItems.length - 1 : count - 1].classList.add('left');
+                nextBtnText.innerText = contentItemsText[count + 1 >= contentItemsText.length ? 0 : count + 1].innerText;
+                prevBtnText.innerText = contentItemsText[count - 1 < 0 ? contentItemsText.length - 1 : count - 1].innerText;
             }
         }
     }
