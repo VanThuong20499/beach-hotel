@@ -1,3 +1,99 @@
+// handle menu
+(function(){
+    const menuItems = document.querySelectorAll('.menu__item');
+    const menuClose = document.querySelector('.menu__close');
+    const menuOpen = document.querySelector('.header__menu-left-btn')
+    const menu = document.querySelector('#menu');
+    const menuWrap = document.querySelector('.menu__wrap');
+    const menuBgBlack = document.querySelector('.menu-bg-black');
+    if(menu){
+        // click hiển thị item
+        for(var i=0; i<menuItems.length; i++){
+            menuItems[i].addEventListener('click', function(){
+                const menuItemChildren = this.querySelector('.menu__item-childrens');
+                if(menuItemChildren){
+                    for(var i=0; i<menuItems.length; i++){
+                        menuItems[i].setAttribute('style', `height: ${this.clientHeight}px`);
+                    }
+                    this.setAttribute('style', `height: ${this.clientHeight + menuItemChildren.clientHeight}px`);
+                }
+            })
+        }
+        // click đóng mở 
+        menuClose.addEventListener('click', function(){
+            let myPromise = function(ms){
+                return new Promise(function(resolve){
+                    setTimeout(resolve, ms)
+                })
+            }
+
+            myPromise()
+                .then(() =>{
+                    menuBgBlack.animate([
+                        {
+                            transform: 'translateX(0)'
+                        },
+                        {
+                            transform: 'translateX(-100%)'
+                        }
+                    ],{
+                        duration: 500,
+                        easing: "ease-out"
+                    });
+                    setTimeout(function(){
+                        menuBgBlack.style.opacity = 0;
+                    },500)
+                    return myPromise(500)
+                })
+                .then(() =>{
+                    menuWrap.animate([
+                        {
+                            transform: 'translateX(0%)'
+                        },
+                        {
+                            transform: 'translateX(-100%)'
+                        }
+                    ],{
+                        duration: 1000,
+                        easing: "ease-in"
+                    })
+                    setTimeout(function(){
+                        menu.style.display = 'none';
+                    }, 1000)
+                })
+        })
+        menuOpen.addEventListener('click', function(){
+            menu.style.display = 'flex';
+            menuBgBlack.style.opacity = 0;
+            menuWrap.animate([
+                {
+                    transform: 'translateX(-100%)'
+                },
+                {
+                    transform: 'translateX(0)'
+                }
+            ],{
+                duration: 500,
+                easing: "ease-in"
+            });
+            setTimeout(function(){
+                menuBgBlack.animate([
+                    {
+                        transform: 'translateX(-100%)'
+                    },
+                    {
+                        transform: 'translateX(0)'
+                    }
+                ],{
+                    duration: 1000,
+                    easing: "ease-out"
+                });
+                menuBgBlack.style.opacity = 1;
+            },500)
+        })
+    }
+})();
+
 // play video
 (function(){
     const video = document.querySelector('.content__video-video');
@@ -74,6 +170,18 @@
                 prevBtnText.innerText = contentItemsText[count - 1 < 0 ? contentItemsText.length - 1 : count - 1].innerText;
             }
         }
+        if(document.documentElement.clientWidth <= 992){
+            contentItems[0].classList.remove('active')
+            contentItems[1].classList.remove('right')
+            contentItems[contentItems.length - 1].classList.remove('left');
+        }
+        window.addEventListener('resize', function(){
+            if(document.documentElement.clientWidth <= 992){
+                contentItems[0].classList.remove('active')
+                contentItems[1].classList.remove('right')
+                contentItems[contentItems.length - 1].classList.remove('left');
+            }
+        })
     }
 })();
 
