@@ -127,7 +127,7 @@
     const contentItems = document.querySelectorAll('.content__rooms-wrap-item');
     const contentItemsText = document.querySelectorAll('.content__rooms-wrap-desc-title a');
     let count = 0;
-    if(contentItems){
+    if(contentItems[0]){
         contentItems[0].classList.add('active')
         contentItems[1].classList.add('right')
         contentItems[contentItems.length - 1].classList.add('left');
@@ -171,15 +171,19 @@
             }
         }
         if(document.documentElement.clientWidth <= 992){
-            contentItems[0].classList.remove('active')
-            contentItems[1].classList.remove('right')
+            contentItems[0].classList.remove('active');
+            contentItems[1].classList.remove('right');
             contentItems[contentItems.length - 1].classList.remove('left');
         }
         window.addEventListener('resize', function(){
             if(document.documentElement.clientWidth <= 992){
-                contentItems[0].classList.remove('active')
-                contentItems[1].classList.remove('right')
+                contentItems[0].classList.remove('active');
+                contentItems[1].classList.remove('right');
                 contentItems[contentItems.length - 1].classList.remove('left');
+            }else{
+                contentItems[0].classList.add('active');
+                contentItems[1].classList.add('right');
+                contentItems[contentItems.length - 1].classList.add('left');
             }
         })
     }
@@ -189,7 +193,7 @@
 (function(){
     const bgVideos = document.querySelectorAll('.content__play-video');
     const playWraps = document.querySelectorAll('.content__play-full-wrap');
-    if(playWraps && bgVideos){
+    if(playWraps[0] && bgVideos[0]){
         for(var i=0; i<playWraps.length; i++){
             let _this = bgVideos[i];
             playWraps[i].addEventListener('mouseenter', function(){
