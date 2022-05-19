@@ -299,3 +299,74 @@
         })
     }
 })();
+
+// room list handle image
+(function () {
+    let contentThumb = document.querySelectorAll('.content__room-thumbnails-link');
+    const contentThumbImg = document.querySelectorAll('.content__room-thumbnails-link img');
+    const contentThumbBtnWrap = document.querySelectorAll('.content__room-btn');
+    let contentThumbBtn = [];
+    let contentBtn;
+    let contentBtnParent;
+    let width = contentThumbImg[0].clientWidth;
+    if (contentThumb[0]) {
+        window.addEventListener('resize', function(){
+            width = contentThumbImg[0].clientWidth;
+        })
+        for (var i = 0; i < contentThumb.length; i++) {
+            contentThumbBtnWrap[i].innerHTML = [...contentThumb[i].querySelectorAll('.content__room-thumbnails-link img')].map(() => {
+                return `<i class="fas fa-circle"></i>`;
+            }).join('');
+        }
+        for (var i = 0; i < contentThumbBtnWrap.length; i++) {
+            contentThumbBtnWrap[i].querySelector('.content__room-btn i').classList.add('active');
+            contentThumbBtn.push(contentThumbBtnWrap[i].querySelectorAll('.content__room-btn i'));
+        }
+        for (var i = 0; i < contentThumbBtn.length; i++) {
+            contentBtn = [...contentThumbBtn[i]];
+            contentBtn.forEach((element, index) => {
+                element.addEventListener('click', function () {
+                    contentBtnParent = this.parentElement;
+                    contentBtnParent.querySelector('.content__room-btn i.active').classList.remove('active');
+                    contentBtn = contentBtnParent.querySelectorAll('i');
+                    this.classList.add('active');
+                    contentThumb = contentBtnParent.parentElement.querySelector('.content__room-thumbnails-link');
+                    contentThumb.style = `transform: translateX(-${width * index}px)`;
+                })
+            });
+        }
+    }
+})();
+
+// room list handle animation scroll
+(function(){
+    const roomWrap = document.querySelectorAll('.content__room-wrap');
+    let count = 0;
+    if(roomWrap[0]){
+        for(var i=0; i<roomWrap.length; i++){
+            roomWrap[i].style.opacity = '0';
+        }
+        function handleScroll(){
+            if(document.documentElement.scrollTop >= roomWrap[count].offsetTop-600){
+                roomWrap[count].animate([
+                    {
+                        transform: 'translateY(200px)',
+                        opacity: 0
+                    },
+                    {
+                        transform: 'translateY(0%)',
+                        opacity: 1
+                    }
+                ],{
+                    duration: 2000
+                })
+                roomWrap[count].style.opacity = '1';
+                count++;
+                if(count >= roomWrap.length){
+                    window.removeEventListener('scroll', handleScroll)
+                }
+            }
+        }
+        window.addEventListener('scroll', handleScroll)
+    }
+})();
