@@ -308,8 +308,8 @@
     let contentThumbBtn = [];
     let contentBtn;
     let contentBtnParent;
-    let width = contentThumbImg[0].clientWidth;
     if (contentThumb[0]) {
+        let width = contentThumbImg[0].clientWidth;
         window.addEventListener('resize', function(){
             width = contentThumbImg[0].clientWidth;
         })

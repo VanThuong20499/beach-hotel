@@ -39,13 +39,26 @@ body::-webkit-scrollbar-thumb{
 }
 
 .row.no-gutters{
-    margin-right: 0;
     margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
 }
 
 .row.no-gutters>*{
     padding-right: 0;
     padding-left: 0;
+}
+
+.margin-l-r-4{
+    margin: 0 4px;
+}
+
+.margin-t-4{
+    margin-top: 4px;
+}
+
+.margin-b-4{
+    margin-bottom: 4px;
 }
 
 .btn{
