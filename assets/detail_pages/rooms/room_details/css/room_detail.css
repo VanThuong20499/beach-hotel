@@ -726,6 +726,10 @@
         width: 100%;
     }
 
+    .room__detail-img-main{
+        height: 300px;
+    }
+
     .footer__bottom{
         flex-direction: column-reverse;
     }
