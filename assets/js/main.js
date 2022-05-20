@@ -11,11 +11,18 @@
         for(var i=0; i<menuItems.length; i++){
             menuItems[i].addEventListener('click', function(){
                 const menuItemChildren = this.querySelector('.menu__item-childrens');
-                if(menuItemChildren){
-                    for(var i=0; i<menuItems.length; i++){
-                        menuItems[i].setAttribute('style', `height: ${this.clientHeight}px`);
+                for (var i = 0; i < menuItems.length; i++) {
+                    menuItems[i].setAttribute('style', `height: ${this.clientHeight}px`);
+                }
+                if (menuItemChildren) {
+                    if(this.clientHeight < menuItemChildren.clientHeight){
+                        this.setAttribute('style', `height: ${this.clientHeight + menuItemChildren.clientHeight + 30}px`);
                     }
-                    this.setAttribute('style', `height: ${this.clientHeight + menuItemChildren.clientHeight}px`);
+                    if (this.clientHeight > 30) {
+                        for (var i = 0; i < menuItems.length; i++) {
+                            menuItems[i].setAttribute('style', `height: 30px`);
+                        }
+                    }
                 }
             })
         }
@@ -472,5 +479,38 @@
             }
             window.addEventListener('click', handleClose);
         })
+    }
+})();
+
+// scroll blog list
+(function () {
+    const blogListWrap = document.querySelectorAll('.blog__list-wrap');
+    let count = 1;
+    if (blogListWrap[1]) {
+        for (var i = 1; i < blogListWrap.length; i++) {
+            blogListWrap[i].style.opacity = '0';
+        }
+        function handleScroll() {
+            if (document.documentElement.scrollTop >= blogListWrap[count].offsetTop - 500) {
+                blogListWrap[count].animate([
+                    {
+                        transform: 'translateY(200px)',
+                        opacity: 0
+                    },
+                    {
+                        transform: 'translateY(0%)',
+                        opacity: 1
+                    }
+                ], {
+                    duration: 2000
+                })
+                blogListWrap[count].style.opacity = '1';
+                count++;
+                if (count >= blogListWrap.length) {
+                    window.removeEventListener('scroll', handleScroll);
+                }
+            }
+        }
+        window.addEventListener('scroll', handleScroll);
     }
 })();
