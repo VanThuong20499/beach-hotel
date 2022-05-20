@@ -290,7 +290,10 @@
         roomForm.addEventListener('click', function(){
             roomItem.classList.add('active');
         })
-        roomItem.addEventListener('mouseleave', function(event){
+        roomItem.addEventListener('mouseleave', function(){
+            roomItem.addEventListener('mouseenter', function(){
+                document.documentElement.removeEventListener('click', handleClose)
+            })
             function handleClose(){
                 roomItem.classList.remove('active');
                 document.documentElement.removeEventListener('click', handleClose)
@@ -368,5 +371,106 @@
             }
         }
         window.addEventListener('scroll', handleScroll)
+    }
+})();
+
+// room detail handle booking
+(function () {
+    const roomDetailForm = document.querySelector('.room__detail-form-room');
+    const roomDetailFormWrap = document.querySelector('.room__detail-form-room-wrap');
+    const roomPersonForm = document.querySelector('.room__detail-form-person');
+    const roomPersonFormWrap = document.querySelector('.room__detail-form-person-wrap');
+    const minusBtn = document.querySelectorAll('.room__detail-form-wrap-number-minus');
+    const plusBtn = document.querySelectorAll('.room__detail-form-wrap-number-plus');
+    const roomNumberView = document.querySelector('.room__detail-form-room-number span');
+    const personNumberView = document.querySelector('.room__detail-form-person-number span');
+    const roomNumber = document.querySelector('.room__detail-form-room-wrap-number p');
+    const adultNumber = document.querySelector('.adult .room__detail-form-person-wrap-number p');
+    const childrenNumber = document.querySelector('.children .room__detail-form-person-wrap-number p');
+    let room = 1;
+    let adult = 1;
+    let children = 0;
+    if (document.querySelector('.room__detail-form')) {
+        roomDetailForm.addEventListener('click', function () {
+            roomDetailFormWrap.style.display = 'flex';
+        })
+
+        roomPersonForm.addEventListener('click', function () {
+            roomPersonFormWrap.style.display = 'block';
+        })
+
+        for (var i = 0; i < plusBtn.length; i++) {
+            plusBtn[i].addEventListener('click', function () {
+                if (this === plusBtn[0]) {
+                    room++;
+                    if (room <= 1) {
+                        room = 1;
+                    }
+                    roomNumber.innerText = `${room}`;
+                    roomNumberView.innerText = room <= 1 ? `${room} room` : `${room} rooms`;
+                } else if (this === plusBtn[1]) {
+                    adult++;
+                    if (adult <= 1) {
+                        adult = 1;
+                    }
+                    adultNumber.innerText = `${adult}`;
+                    personNumberView.innerText = `${adult} Adult , ${children} Children`;
+                } else if (this === plusBtn[2]) {
+                    children++;
+                    if (children < 0) {
+                        children = 0;
+                    }
+                    childrenNumber.innerText = `${children}`;
+                    personNumberView.innerText = `${adult} Adult , ${children} Children`;
+                }
+            })
+        }
+        for (var i = 0; i < minusBtn.length; i++) {
+            minusBtn[i].addEventListener('click', function () {
+                if (this === minusBtn[0]) {
+                    room--;
+                    if (room <= 1) {
+                        room = 1;
+                    }
+                    roomNumber.innerText = `${room}`;
+                    roomNumberView.innerText = room <= 1 ? `${room} room` : `${room} rooms`;
+                } else if (this === minusBtn[1]) {
+                    adult--;
+                    if (adult <= 1) {
+                        adult = 1;
+                    }
+                    adultNumber.innerText = `${adult}`;
+                    personNumberView.innerText = `${adult} Adult , ${children} Children`;
+                } else if (this === minusBtn[2]) {
+                    children--;
+                    if (children < 0) {
+                        children = 0;
+                    }
+                    childrenNumber.innerText = `${children}`;
+                    personNumberView.innerText = `${adult} Adult , ${children} Children`;
+                }
+            })
+        }
+        roomDetailFormWrap.addEventListener('mouseleave', function () {
+            roomDetailFormWrap.addEventListener('mouseenter', function(){
+                window.removeEventListener('click', handleClose);
+            })
+            function handleClose() {
+                roomDetailFormWrap.style.display = 'none';
+                window.removeEventListener('click', handleClose);
+            }
+            window.addEventListener('click', handleClose);
+        })
+
+        roomPersonFormWrap.addEventListener('mouseleave', function(){
+            roomPersonFormWrap.addEventListener('mouseenter', function(){
+                window.removeEventListener('click', handleClose);
+            })
+            function handleClose() {
+                roomPersonFormWrap.style.display = 'none';
+                window.removeEventListener('click', handleClose);
+            }
+            window.addEventListener('click', handleClose);
+        })
     }
 })();

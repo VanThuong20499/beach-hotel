@@ -124,7 +124,6 @@
     width: 100%;
     height: 500px;
     overflow: hidden;
-    border-radius: 16px;
 }
 
 .room__detail-img-main{
@@ -132,7 +131,6 @@
     width: 100%;
     height: 500px;
     object-fit: cover;
-    overflow: hidden;
 }
 
 .room__detail-img-subsidiary{
@@ -165,6 +163,7 @@
 
 .room__detail-info{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     list-style: none;
     margin-bottom: 30px;
@@ -385,15 +384,62 @@
     border: 1px solid #eee;
     z-index: 1;
     padding: 20px;
+    display: none;
 }
 
+.room__detail-form-person-wrap > .children > p,
+.room__detail-form-person-wrap > .adult > p,
 .room__detail-form-room-wrap p{
     margin-bottom: 0;
+    text-transform: capitalize;
+    font-size: 15px;
+    color: var(--text-color-2);
 }
 
 .room__detail-form-room-wrap-number{
     display: flex;
     align-items: center;
+}
+
+.room__detail-form-person-wrap-number p,
+.room__detail-form-room-wrap-number p{
+    padding: 0 12px;
+    font-size: 18px;
+    color: var(--text-color-1);
+    font-weight: 500;
+}
+
+.room__detail-form-wrap-number-plus,
+.room__detail-form-wrap-number-minus{
+    cursor: pointer;
+}
+
+.room__detail-form-person-wrap{
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 5%);
+    border: 1px solid #eee;
+    z-index: 1;
+    padding: 20px;
+    display: none;
+}
+
+.room__detail-form-person-wrap-number,
+.room__detail-form-person-wrap .children,
+.room__detail-form-person-wrap .adult{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room__detail-form-person-wrap .adult{
+    margin-bottom: 15px;
+}
+
+.room__detail-form-person-wrap p{
+    margin-bottom: 0;
 }
 
 /* footer */
@@ -636,12 +682,29 @@
     .hide-mobile-tablet{
         display: none;
     }
+
+    .room__detail-img{
+        overflow: auto;
+        height: unset;
+    }
+
+    .room__detail-img-subsidiary{
+        height: 100px;
+    }
+
+    .room__detail-form{
+        margin-top: 60px;
+    }
 }
 
 /* reponsive tablet */
 @media (min-width: 768px) and (max-width: 991.98px){
     .hide-tablet{
         display: none;
+    }
+
+    .room__detail-img-main{
+        height: 400px;
     }
 }
 

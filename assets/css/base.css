@@ -49,16 +49,8 @@ body::-webkit-scrollbar-thumb{
     padding-left: 0;
 }
 
-.margin-l-r-4{
-    margin: 0 4px;
-}
-
-.margin-t-4{
-    margin-top: 4px;
-}
-
-.margin-b-4{
-    margin-bottom: 4px;
+.margin-4{
+    margin: 4px;
 }
 
 .btn{
