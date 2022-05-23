@@ -672,3 +672,31 @@
         }
     }
 })();
+
+// handle scroll servicer
+(function(){
+    const servicesWraps = document.querySelectorAll('.services__wrap');
+    const servicesImgs = document.querySelectorAll('.services__img');
+    let servicesWrapIndex = 0;
+    let servicesImgIndex = 0;
+    if(servicesWraps[0]){
+        window.addEventListener('scroll', function(){
+            if(servicesWrapIndex < servicesWraps.length){
+                if(document.documentElement.scrollTop >= servicesWraps[servicesWrapIndex].offsetTop - 500){
+                    servicesWraps[servicesWrapIndex].classList.add('active');
+                    servicesWrapIndex++;
+                }
+            }
+        })
+    }
+    if(servicesImgs[0]){
+        window.addEventListener('scroll', function(){
+            if(servicesImgIndex < servicesImgs.length){
+                if(document.documentElement.scrollTop >= servicesImgs[servicesImgIndex].offsetTop - 500){
+                    servicesImgs[servicesImgIndex].classList.add('active');
+                    servicesImgIndex++;
+                }
+            }
+        })
+    }
+})();
