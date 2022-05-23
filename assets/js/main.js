@@ -514,3 +514,86 @@
         window.addEventListener('scroll', handleScroll);
     }
 })();
+
+// handle scroll about us
+(function () {
+    const aboutIntroduceWrap = document.querySelector('.about__introduce-wrap');
+    const aboutIntroduceImg = document.querySelector('.about__introduce-img-wrap');
+    const aboutStoryImg = document.querySelector('.about__story-img-wrap');
+    const aboutStoryWrap = document.querySelector('.about__story-wrap');
+    const aboutTeams = document.querySelectorAll('.about__teams-wrap');
+    let count = 0;
+    function handleScroll() {
+        if (aboutIntroduceWrap && count === 0) {
+            if (document.documentElement.scrollTop >= aboutIntroduceWrap.offsetTop - 600) {
+                aboutIntroduceWrap.classList.add('active');
+                count += 1;
+            }
+        } else if (aboutIntroduceImg && count === 1) {
+            if (document.documentElement.scrollTop >= aboutIntroduceImg.offsetTop - 600) {
+                aboutIntroduceImg.classList.add('active');
+                count += 1;
+            }
+        } else if (aboutStoryWrap && count === 2) {
+            if (document.documentElement.scrollTop >= aboutStoryWrap.offsetTop - 600) {
+                aboutStoryWrap.classList.add('active');
+                count += 1;
+            }
+        } else if (aboutStoryImg && count === 3) {
+            if (document.documentElement.scrollTop >= aboutStoryImg.offsetTop - 600) {
+                aboutStoryImg.classList.add('active');
+                count += 1;
+            }
+        } else if (aboutTeams[0] && count === 4) {
+            for (var i = 0; i < aboutTeams.length; i++) {
+                if (document.documentElement.scrollTop >= aboutTeams[i].offsetTop - 600) {
+                    aboutTeams[i].classList.add('active');
+                }
+            }
+        }
+    }
+    window.addEventListener('scroll', handleScroll);
+})();
+
+// handle about info number
+(function () {
+    const aboutInfoItem = document.querySelectorAll('.about__info-item p');
+    const roomNum = new Number(aboutInfoItem[0].innerText);
+    const staffsNum = new Number(aboutInfoItem[1].innerText);
+    const locationsNum = new Number(aboutInfoItem[2].innerText);
+    let roomCount = 0;
+    let staffsCount = 0;
+    let locationsCount = 0;
+    if (aboutInfoItem[0]) {
+        for (var i = 0; i < aboutInfoItem.length; i++) {
+            aboutInfoItem[i].innerText = '';
+        }
+        function handleScroll() {
+            if (document.documentElement.scrollTop >= aboutInfoItem[0].offsetTop - 500) {
+                const setRoom = setInterval(function () {
+                    aboutInfoItem[0].innerText = roomCount;
+                    roomCount++;
+                    if (roomCount > roomNum) {
+                        clearInterval(setRoom);
+                    }
+                }, 2000 / roomNum);
+                const setStaffs = setInterval(function () {
+                    aboutInfoItem[1].innerText = staffsCount;
+                    staffsCount++;
+                    if (staffsCount > staffsNum) {
+                        clearInterval(setStaffs);
+                    }
+                }, 2000 / staffsNum);
+                const setLocations = setInterval(function () {
+                    aboutInfoItem[2].innerText = locationsCount;
+                    locationsCount++;
+                    if (locationsCount > locationsNum) {
+                        clearInterval(setLocations);
+                    }
+                }, 1000 / locationsNum)
+                window.removeEventListener('scroll', handleScroll);
+            }
+        }
+        window.addEventListener('scroll', handleScroll);
+    }
+})();
