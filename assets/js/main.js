@@ -558,13 +558,13 @@
 // handle about info number
 (function () {
     const aboutInfoItem = document.querySelectorAll('.about__info-item p');
-    const roomNum = new Number(aboutInfoItem[0].innerText);
-    const staffsNum = new Number(aboutInfoItem[1].innerText);
-    const locationsNum = new Number(aboutInfoItem[2].innerText);
     let roomCount = 0;
     let staffsCount = 0;
     let locationsCount = 0;
     if (aboutInfoItem[0]) {
+        const roomNum = new Number(aboutInfoItem[0].innerText);
+        const staffsNum = new Number(aboutInfoItem[1].innerText);
+        const locationsNum = new Number(aboutInfoItem[2].innerText);
         for (var i = 0; i < aboutInfoItem.length; i++) {
             aboutInfoItem[i].innerText = '';
         }

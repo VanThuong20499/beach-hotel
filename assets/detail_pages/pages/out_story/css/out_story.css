@@ -121,6 +121,142 @@
     padding: 80px 0;
 }
 
+.out__story-introduce{
+    max-width: 650px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--text-color-1);
+    text-align: center;
+}
+
+.out__story-title{
+    max-width: 650px;
+    margin: 0 auto;
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.out__story-title h2{
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 42px;
+    color: var(--text-color-1);
+    margin-bottom: 10px;
+}
+
+.out__story-title p{
+    font-size: 18px;
+    color: var(--text-color-2);
+}
+
+.out__story-wrap-items{
+    margin-bottom: 50px;
+}
+
+.out__story-wrap{
+    padding-right: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.out__story-wrap h6{
+    font-size: 15px;
+    color: var(--text-color-1);
+    letter-spacing: 4px;
+    padding-left: 65px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    position: relative;
+    opacity: 0;
+}
+
+.out__story-wrap h6::after{
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 1px;
+    background-color: var(--text-color-1);
+    top: 50%;
+    left: 0;
+}
+
+.out__story-wrap h3{
+    font-size: 42px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    color: var(--text-color-1);
+    margin-bottom: 20px;
+    opacity: 0;
+}
+
+.out__story-wrap p{
+    font-size: 18px;
+    color: var(--text-color-2);
+    line-height: 24px;
+    opacity: 0;
+}
+
+.out__story-img{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.out__story-img img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    opacity: 0;
+}
+
+.out__story-wrap.active h6{
+    animation: slideUp 0.5s linear forwards;
+}
+
+.out__story-wrap.active h3{
+    animation: slideUp 0.5s 0.3s linear forwards;
+}
+
+.out__story-wrap.active p{
+    animation: slideUp 0.5s 0.6s linear forwards;
+}
+
+.out__story-img.active img{
+    animation: zoom 0.5s 0.5s linear forwards;
+}
+
+.out__story-img.active::after{
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    background-color: var(--color-blue);
+    z-index: 1;
+    animation: slideRight linear 1s;
+}
+
+.out__story-reverse{
+    flex-direction: row-reverse;
+}
+
+.out__story-reverse .out__story-wrap{
+    padding-left: 75px;
+    padding-right: 0;
+}
+
+.out__story-reverse .out__story-img.active::after{
+    animation: slideLeft linear 1s;
+}
+
 /* footer */
 .footer {
     padding: 80px 0;
