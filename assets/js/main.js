@@ -196,6 +196,89 @@
     }
 })();
 
+// handle calendar
+(function () {
+    if (document.querySelector('.calendar-wrap')) {
+        const date = new Date();
+        const renderCalendar = () => {
+            date.setDate(1);
+            const monthDays = document.querySelector('.calendar__current-month .days');
+            const nextMonthDays = document.querySelector('.calendar__next-month .days');
+            const lastDays = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+            const lastDayNextMonth = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
+            const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
+            const firstDayIndex = date.getDay();
+            const months = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ];
+            document.querySelector('.calendar__current-month .date h6').innerText = `${months[date.getMonth()]} ${date.getFullYear()}`;
+            document.querySelector('.calendar__next-month .date h6').innerText = `${months[date.getMonth() + 1]} ${date.getFullYear()}`;
+
+            let currentDays = '';
+            let nextDaysMonth = '';
+            for (let i = firstDayIndex; i > 0; i--) {
+                currentDays += `<p></p>`;
+            }
+            for (let i = 1; i <= lastDays; i++) {
+                if (i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
+                    currentDays += `<p class='today'>${i}</p>`;
+                } else {
+                    currentDays += `<p>${i}</p>`
+                }
+            }
+            monthDays.innerHTML = currentDays;
+            for (let i = lastDayIndex; i > 0; i--) {
+                nextDaysMonth += `<p></p>`;
+            }
+            for (let i = 1; i <= lastDayNextMonth; i++) {
+                nextDaysMonth += `<p>${i}</p>`;
+            }
+            nextMonthDays.innerHTML = nextDaysMonth;
+        }
+        document.querySelector('.calendar-wrap .prev').addEventListener('click', function(){
+            if(date.getMonth() > new Date().getMonth() || date.getFullYear() > new Date().getFullYear()){
+                date.setMonth(date.getMonth() - 2);
+                renderCalendar();
+            }
+        })
+        document.querySelector('.calendar-wrap .next').addEventListener('click', function(){
+            document.querySelector('.calendar-wrap .prev').classList.add('active');
+            date.setMonth(date.getMonth() + 2);
+            renderCalendar();
+        })
+        renderCalendar();
+        // click day
+        const monthDays = Array.from(document.querySelectorAll('.calendar-wrap .days > p'));
+        const newMonthDays = monthDays.filter(value => {
+            return value.innerText !== '';
+        })
+        let count = 0;
+        for(let i=0; i<newMonthDays.length; i++){
+            newMonthDays[i].addEventListener('click', function(){
+                let dateElement = this.parentElement.parentElement.querySelector('.month h6');
+                if(count === 0){
+                    document.querySelector('#check-in-out').value = `${this.innerText} ${dateElement.innerText} - `;
+                    this.setAttribute('data', )
+                    count++;
+                }else if(count === 1){
+
+                }
+            })
+        }
+    }
+})();
+
 // hover play bg video
 (function(){
     const bgVideos = document.querySelectorAll('.content__play-video');
