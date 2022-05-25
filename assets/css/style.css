@@ -901,6 +901,11 @@
     font-family: 'Jost', sans-serif;
 }
 
+.content__booking-form-rooms > span{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .content__booking-form-rooms-items{
     position: absolute;
@@ -1254,11 +1259,15 @@
     top: 100%;
     left: 0;
     z-index: 1;
-    display: flex;
+    display: none;
     padding: 30px 0;
     border-radius: 4px;
     border: 1px solid #eee;
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 5%);
+}
+
+.calendar-wrap.active{
+    display: flex;
 }
 
 .calendar__next-month,
@@ -1340,6 +1349,15 @@
 
 .calendar-wrap .prev.active{
     opacity: 1;
+}
+
+.days .active{
+    background-color: var(--color-blue);
+    color: #fff;
+}
+
+.next-mobile{
+    display: none;
 }
 
 /* reposive mobile and tablet */
@@ -1514,5 +1532,24 @@
 
     .footer__bottom{
         flex-direction: column-reverse;
+    }
+
+    .calendar-wrap{
+        width: 350px;
+    }
+
+    .calendar__current-month{
+        width: 100%;
+        flex: 0 0 100%;
+        border-right: none;
+    }
+    
+    .next-mobile{
+        display: block;
+    }
+
+    .calendar__current-month .date{
+        left: 0;
+        transform: translateX(0);
     }
 }

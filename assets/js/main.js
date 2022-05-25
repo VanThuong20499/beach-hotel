@@ -200,6 +200,14 @@
 (function () {
     if (document.querySelector('.calendar-wrap')) {
         const date = new Date();
+        let monthDayss;
+        let newMonthDays;
+        const checkInOut = document.querySelector('#check-in-out');
+        const calendar = document.querySelector('.calendar-wrap');
+        checkInOut.addEventListener('click', function () {
+            calendar.classList.add('active');
+        })
+        let count = 0;
         const renderCalendar = () => {
             date.setDate(1);
             const monthDays = document.querySelector('.calendar__current-month .days');
@@ -245,37 +253,65 @@
                 nextDaysMonth += `<p>${i}</p>`;
             }
             nextMonthDays.innerHTML = nextDaysMonth;
-        }
-        document.querySelector('.calendar-wrap .prev').addEventListener('click', function(){
-            if(date.getMonth() > new Date().getMonth() || date.getFullYear() > new Date().getFullYear()){
-                date.setMonth(date.getMonth() - 2);
-                renderCalendar();
-            }
-        })
-        document.querySelector('.calendar-wrap .next').addEventListener('click', function(){
-            document.querySelector('.calendar-wrap .prev').classList.add('active');
-            date.setMonth(date.getMonth() + 2);
-            renderCalendar();
-        })
-        renderCalendar();
-        // click day
-        const monthDays = Array.from(document.querySelectorAll('.calendar-wrap .days > p'));
-        const newMonthDays = monthDays.filter(value => {
-            return value.innerText !== '';
-        })
-        let count = 0;
-        for(let i=0; i<newMonthDays.length; i++){
-            newMonthDays[i].addEventListener('click', function(){
-                let dateElement = this.parentElement.parentElement.querySelector('.month h6');
-                if(count === 0){
-                    document.querySelector('#check-in-out').value = `${this.innerText} ${dateElement.innerText} - `;
-                    this.setAttribute('data', )
-                    count++;
-                }else if(count === 1){
-
-                }
+            monthDayss = Array.from(document.querySelectorAll('.calendar-wrap .days > p'));
+            newMonthDays = monthDayss.filter(value => {
+                return value.innerText !== '';
             })
+            for(let i=0; i<newMonthDays.length; i++){
+                newMonthDays[i].addEventListener('click', function(){
+                    console.log(this)
+                    let dateElement = this.parentElement.parentElement.querySelector('.month h6');
+                    if(count === 0){
+                        document.querySelector('#check-in-out').value = `${this.innerText} ${dateElement.innerText} - `;
+                        let dayActive = document.querySelectorAll('.calendar-wrap .days .active');
+                        if (dayActive) {
+                            for (let i = 0; i < dayActive.length; i++) {
+                                dayActive[i].classList.remove('active');
+                            }
+                        }
+                        this.classList.add('active');
+                        count++;
+                    }else if(count === 1){
+                        document.querySelector('#check-in-out').value = `${document.querySelector('#check-in-out').value} ${this.innerText} ${dateElement.innerText}`;
+                        calendar.classList.remove('active');
+                        this.classList.add('active');
+                        count = 0;
+                    }
+                })
+            }
         }
+        window.addEventListener('resize', function () {
+            handleRenderCalendar();
+        })
+        function handleRenderCalendar() {
+            if (document.documentElement.offsetWidth <= 768) {
+                document.querySelector('.calendar-wrap .prev').addEventListener('click', function () {
+                    if (date.getMonth() > new Date().getMonth() || date.getFullYear() > new Date().getFullYear()) {
+                        date.setMonth(date.getMonth() - 1);
+                        renderCalendar();
+                    }
+                })
+                document.querySelector('.calendar-wrap .next-mobile').addEventListener('click', function () {
+                    document.querySelector('.calendar-wrap .prev').classList.add('active');
+                    date.setMonth(date.getMonth() + 1);
+                    renderCalendar();
+                })
+            } else {
+                document.querySelector('.calendar-wrap .prev').addEventListener('click', function () {
+                    if (date.getMonth() > new Date().getMonth() || date.getFullYear() > new Date().getFullYear()) {
+                        date.setMonth(date.getMonth() - 2);
+                        renderCalendar();
+                    }
+                })
+                document.querySelector('.calendar-wrap .next').addEventListener('click', function () {
+                    document.querySelector('.calendar-wrap .prev').classList.add('active');
+                    date.setMonth(date.getMonth() + 2);
+                    renderCalendar();
+                })
+            }
+        }
+        handleRenderCalendar();
+        renderCalendar();
     }
 })();
 
