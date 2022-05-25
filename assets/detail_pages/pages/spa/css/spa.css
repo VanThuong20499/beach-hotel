@@ -116,9 +116,130 @@
 }
 
 /* content */
-
-.content{
+.spa__desc{
     padding: 80px 0;
+}
+
+.spa__desc-title{
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 24px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    color: var(--text-color-1);
+    text-align: center;
+}
+
+.spa__desc-items{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.spa__desc-item{
+    padding: 0 40px;
+}
+
+.spa__desc-item:nth-child(2){
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+.spa__desc-item p{
+    font-size: 15px;
+    text-transform: uppercase;
+    color: var(--color-blue);
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.spa__desc-item span{
+    display: block;
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--text-color-1);
+}
+
+.content__video{
+    width: 100%;
+    height: 460px;
+    overflow: hidden;
+    position: relative;
+}
+
+.content__video-video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all linear 0.2s;
+}
+
+.content__video-wrap{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+.content__video-items{
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.content__video-title{
+    transition: all linear 0.5s;
+    opacity: 1;
+}
+
+.content__video-title h6{
+    position: relative;
+    font-size: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 4px;
+    padding-left: 75px;
+    margin-bottom: 20px;
+}
+
+.content__video-title h3{
+    font-size: 42px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    color: #fff;
+}
+
+.content__video-title h6::after{
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 1px;
+    background-color: #fff;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.content__video-pause-icon,
+.content__video-play-icon{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.content__video-pause-icon,
+.content__video-play.active .content__video-play-icon{
+    display: none;
+}
+
+.content__video-play .content__video-play-icon,
+.content__video-play.active .content__video-pause-icon{
+    display: block;
 }
 
 /* footer */
@@ -390,5 +511,18 @@
 
     .footer__bottom{
         flex-direction: column-reverse;
+    }
+
+    .content__video-items{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .content__video-wrap{
+        top: 30%;
+    }
+
+    .content__video-play{
+        margin-top: 50px;
     }
 }
