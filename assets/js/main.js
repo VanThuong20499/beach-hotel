@@ -819,3 +819,47 @@
         })
     }
 })();
+
+// handle Scroll Spa
+(function(){
+    const spaImgs = document.querySelectorAll('.spa__services-img');
+    const spaWraps = document.querySelectorAll('.spa__services-wrap');
+    let spaImgIndex = 0;
+    let spaWrapIndex = 0;
+    window.addEventListener('scroll', function(){
+        if(spaImgs[0]){
+            if(spaImgIndex < spaImgs.length && document.documentElement.scrollTop >= spaImgs[spaImgIndex].offsetTop - 500){
+                spaImgs[spaImgIndex].classList.add('active');
+                spaImgIndex++;
+            }
+        }
+        if(spaWraps[0]){
+            if(spaWrapIndex < spaWraps.length && document.documentElement.scrollTop >= spaWraps[spaWrapIndex].offsetTop - 500){
+                spaWraps[spaWrapIndex].classList.add('active');
+                spaWrapIndex++;
+            }
+        }
+    })
+})();
+
+// show services Spa
+(function () {
+    const spaServicesWrap = document.querySelectorAll('.spa__services-wrap-items');
+    const spaServicesTitle = document.querySelectorAll('.spa__services-wrap-items h6');
+    let height = spaServicesTitle[0].clientHeight + 20;
+    if (spaServicesWrap[0]) {
+        for (let i = 0; i < spaServicesWrap.length; i++) {
+            spaServicesWrap[i].style.height = `${height}px`;
+            spaServicesWrap[i].addEventListener('click', function () {
+                for (let i = 0; i < spaServicesWrap.length; i++) {
+                    spaServicesWrap[i].style.height = `${height}px`;
+                }
+                if (this.clientHeight <= height) {
+                    this.style.height = `${height + this.querySelector('.spa__services-wrap-items p').clientHeight + 15}px`;
+                } else {
+                    this.style.height = `${height}px`;
+                }
+            })
+        }
+    }
+})();
