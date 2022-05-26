@@ -194,6 +194,46 @@
     color: var(--color-blue);
 }
 
+.room__meeting-info-img{
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+
+.room__meeting-info-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.room__meeting-info-wrap{
+    padding: 0 40px;
+}
+
+.room__meeting-info-wrap h3{
+    font-size: 36px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    color: var(--text-color-1);
+    margin-bottom: 10px;
+}
+
+.room__meeting-info-wrap .room__meeting-info-price{
+    font-size: 15px;
+    color: var(--color-blue);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.room__meeting-info-wrap p{
+    font-size: 18px;
+    color: var(--text-color-2);
+    margin-bottom: 20px;
+}
+
 /* footer */
 .footer {
     padding: 80px 0;
