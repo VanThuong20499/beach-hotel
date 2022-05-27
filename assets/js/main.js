@@ -748,6 +748,62 @@
     }
 })();
 
+// handle services metting room
+(function(){
+    const roomMeetingWrap = document.querySelector('.room__meeting-desc-items');
+    const roomMeetingItems = document.querySelectorAll('.room__meeting-desc-item');
+    const roomMeetingBtn = document.querySelector('.room__meeting-desc-btn');
+    if(roomMeetingWrap){
+        let width = roomMeetingWrap.querySelector('.room__meeting-desc-item').clientWidth;
+        let btnIndex = 0;
+        let htmls = '';
+        let clickBtns = roomMeetingBtn.querySelectorAll('i');
+        if(document.documentElement.clientWidth >= 992){
+            btnIndex = roomMeetingItems.length - 4;
+        }else if(document.documentElement.clientWidth >= 768 && document.documentElement.clientWidth < 992){
+            btnIndex = roomMeetingItems.length - 3;
+        }else if(document.documentElement.clientWidth < 768){
+            btnIndex = roomMeetingItems.length - 1;
+        }
+        window.addEventListener('resize', function(){
+            width = roomMeetingWrap.querySelector('.room__meeting-desc-item').clientWidth;
+            htmls = '';
+            if(document.documentElement.clientWidth >= 992){
+                btnIndex = roomMeetingItems.length - 4;
+            }else if(document.documentElement.clientWidth >= 768 && document.documentElement.clientWidth < 992){
+                btnIndex = roomMeetingItems.length - 3;
+            }else if(document.documentElement.clientWidth < 768){
+                btnIndex = roomMeetingItems.length - 1;
+            }
+            for(let i=0; i<=btnIndex; i++){
+                htmls += `<i class="fas fa-circle ${i === 0 ? 'active' : ''}"></i>`;
+            }
+            roomMeetingBtn.innerHTML = htmls;
+            clickBtns = roomMeetingBtn.querySelectorAll('i');
+            clickBtns.forEach((element, index) => {
+                element.addEventListener('click', function(){
+                    roomMeetingBtn.querySelector('i.active').classList.remove('active');
+                    element.classList.add('active');
+                    roomMeetingWrap.style = `transform: translateX(-${width * index}px)`;
+                })
+            });
+            roomMeetingWrap.style = `transform: translateX(-0px)`;
+        })
+        for(let i=0; i<=btnIndex; i++){
+            htmls += `<i class="fas fa-circle ${i === 0 ? 'active' : ''}"></i>`;
+        }
+        roomMeetingBtn.innerHTML = htmls;
+        clickBtns = roomMeetingBtn.querySelectorAll('i');
+        clickBtns.forEach((element, index) => {
+            element.addEventListener('click', function(){
+                roomMeetingBtn.querySelector('i.active').classList.remove('active');
+                element.classList.add('active');
+                roomMeetingWrap.style = `transform: translateX(-${width * index}px)`;
+            })
+        });
+    }
+})();
+
 // handle scroll animation
 (function(){
     function handleScroll(classElement){
@@ -774,4 +830,6 @@
     handleScroll(document.querySelectorAll('.about__story-img-wrap'));
     handleScroll(document.querySelectorAll('.about__story-wrap'));
     handleScroll(document.querySelectorAll('.about__teams-wrap'));
+    handleScroll(document.querySelectorAll('.room__meeting-floor-wrap'));
+    handleScroll(document.querySelectorAll('.room__meeting-floor-img'));
 })();
