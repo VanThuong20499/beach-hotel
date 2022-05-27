@@ -146,6 +146,22 @@ body::-webkit-scrollbar-thumb{
     }
 }
 
+@keyframes slideUpBg{
+    0%{
+        bottom: 0;
+        width: 0%;
+    }
+
+    50%{
+        width: 100%;
+    }
+
+    100%{
+        top: 0;
+        width: 0%;
+    }
+}
+
 @keyframes slideUp{
     0%{
         opacity: 0;
