@@ -27,7 +27,7 @@
             })
         }
         // click đóng mở 
-        menuClose.addEventListener('click', function(){
+        function closeMenu(){
             let myPromise = function(ms){
                 return new Promise(function(resolve){
                     setTimeout(resolve, ms)
@@ -45,7 +45,8 @@
                         }
                     ],{
                         duration: 500,
-                        easing: "ease-out"
+                        easing: "ease-out",
+                        endDelay: 100,
                     });
                     setTimeout(function(){
                         menuBgBlack.style.opacity = 0;
@@ -68,7 +69,9 @@
                         menu.style.display = 'none';
                     }, 1000)
                 })
-        })
+        }
+        menuBgBlack.addEventListener('click', closeMenu)
+        menuClose.addEventListener('click', closeMenu)
         menuOpen.addEventListener('click', function(){
             menu.style.display = 'flex';
             menuBgBlack.style.opacity = 0;
@@ -634,46 +637,6 @@
     }
 })();
 
-// handle scroll about us
-(function () {
-    const aboutIntroduceWrap = document.querySelector('.about__introduce-wrap');
-    const aboutIntroduceImg = document.querySelector('.about__introduce-img-wrap');
-    const aboutStoryImg = document.querySelector('.about__story-img-wrap');
-    const aboutStoryWrap = document.querySelector('.about__story-wrap');
-    const aboutTeams = document.querySelectorAll('.about__teams-wrap');
-    let count = 0;
-    function handleScroll() {
-        if (aboutIntroduceWrap && count === 0) {
-            if (document.documentElement.scrollTop >= aboutIntroduceWrap.offsetTop - 600) {
-                aboutIntroduceWrap.classList.add('active');
-                count += 1;
-            }
-        } else if (aboutIntroduceImg && count === 1) {
-            if (document.documentElement.scrollTop >= aboutIntroduceImg.offsetTop - 600) {
-                aboutIntroduceImg.classList.add('active');
-                count += 1;
-            }
-        } else if (aboutStoryWrap && count === 2) {
-            if (document.documentElement.scrollTop >= aboutStoryWrap.offsetTop - 600) {
-                aboutStoryWrap.classList.add('active');
-                count += 1;
-            }
-        } else if (aboutStoryImg && count === 3) {
-            if (document.documentElement.scrollTop >= aboutStoryImg.offsetTop - 600) {
-                aboutStoryImg.classList.add('active');
-                count += 1;
-            }
-        } else if (aboutTeams[0] && count === 4) {
-            for (var i = 0; i < aboutTeams.length; i++) {
-                if (document.documentElement.scrollTop >= aboutTeams[i].offsetTop - 600) {
-                    aboutTeams[i].classList.add('active');
-                }
-            }
-        }
-    }
-    window.addEventListener('scroll', handleScroll);
-})();
-
 // handle about info number
 (function () {
     const aboutInfoItem = document.querySelectorAll('.about__info-item p');
@@ -717,37 +680,8 @@
     }
 })();
 
-// handle scroll out story
-(function () {
-    const storyWraps = document.querySelectorAll('.out__story-wrap');
-    const storyImgs = document.querySelectorAll('.out__story-img');
-    let storyWrapIndex = 0;
-    let storyImgIndex = 0;
-    if (storyWraps[0]) {
-        window.addEventListener('scroll', function () {
-            if (storyWrapIndex < storyWraps.length) {
-                if (document.documentElement.scrollTop >= storyWraps[storyWrapIndex].offsetTop - 500) {
-                    storyWraps[storyWrapIndex].classList.add('active');
-                    storyWrapIndex++;
-                }
-            }
-        })
-    }
-    if (storyImgs[0]) {
-        window.addEventListener('scroll', function () {
-            if (storyImgIndex < storyImgs.length) {
-                if (document.documentElement.scrollTop >= storyImgs[storyImgIndex].offsetTop - 500) {
-                    storyImgs[storyImgIndex].classList.add('active');
-                    storyImgIndex++;
-                }
-            }
-        })
-    }
-})();
-
 // handle click img out story
 (function () {
-    // code
     const storyImgBtn = document.querySelectorAll('.out__story-img-btn');
     let storyImgs = [];
     let imgs = [];
@@ -792,62 +726,12 @@
     }
 })();
 
-// handle scroll servicer
-(function(){
-    const servicesWraps = document.querySelectorAll('.services__wrap');
-    const servicesImgs = document.querySelectorAll('.services__img');
-    let servicesWrapIndex = 0;
-    let servicesImgIndex = 0;
-    if(servicesWraps[0]){
-        window.addEventListener('scroll', function(){
-            if(servicesWrapIndex < servicesWraps.length){
-                if(document.documentElement.scrollTop >= servicesWraps[servicesWrapIndex].offsetTop - 500){
-                    servicesWraps[servicesWrapIndex].classList.add('active');
-                    servicesWrapIndex++;
-                }
-            }
-        })
-    }
-    if(servicesImgs[0]){
-        window.addEventListener('scroll', function(){
-            if(servicesImgIndex < servicesImgs.length){
-                if(document.documentElement.scrollTop >= servicesImgs[servicesImgIndex].offsetTop - 500){
-                    servicesImgs[servicesImgIndex].classList.add('active');
-                    servicesImgIndex++;
-                }
-            }
-        })
-    }
-})();
-
-// handle Scroll Spa
-(function(){
-    const spaImgs = document.querySelectorAll('.spa__services-img');
-    const spaWraps = document.querySelectorAll('.spa__services-wrap');
-    let spaImgIndex = 0;
-    let spaWrapIndex = 0;
-    window.addEventListener('scroll', function(){
-        if(spaImgs[0]){
-            if(spaImgIndex < spaImgs.length && document.documentElement.scrollTop >= spaImgs[spaImgIndex].offsetTop - 500){
-                spaImgs[spaImgIndex].classList.add('active');
-                spaImgIndex++;
-            }
-        }
-        if(spaWraps[0]){
-            if(spaWrapIndex < spaWraps.length && document.documentElement.scrollTop >= spaWraps[spaWrapIndex].offsetTop - 500){
-                spaWraps[spaWrapIndex].classList.add('active');
-                spaWrapIndex++;
-            }
-        }
-    })
-})();
-
 // show services Spa
 (function () {
     const spaServicesWrap = document.querySelectorAll('.spa__services-wrap-items');
     const spaServicesTitle = document.querySelectorAll('.spa__services-wrap-items h6');
-    let height = spaServicesTitle[0].clientHeight + 20;
     if (spaServicesWrap[0]) {
+        let height = spaServicesTitle[0].clientHeight + 20;
         for (let i = 0; i < spaServicesWrap.length; i++) {
             spaServicesWrap[i].style.height = `${height}px`;
             spaServicesWrap[i].addEventListener('click', function () {
@@ -862,4 +746,32 @@
             })
         }
     }
+})();
+
+// handle scroll animation
+(function(){
+    function handleScroll(classElement){
+        let index = 0;
+        window.addEventListener('scroll', function(){
+            if(classElement[0]){
+                if(index < classElement.length && document.documentElement.scrollTop >= classElement[index].offsetTop - 600){
+                    classElement[index].classList.add('active');
+                    index++;
+                }
+            }
+        })
+    }
+    handleScroll(document.querySelectorAll('.room__meeting-info-wrap'));
+    handleScroll(document.querySelectorAll('.room__meeting-info-img'));
+    handleScroll(document.querySelectorAll('.spa__services-img'));
+    handleScroll(document.querySelectorAll('.spa__services-wrap'));
+    handleScroll(document.querySelectorAll('.services__wrap'));
+    handleScroll(document.querySelectorAll('.services__img'));
+    handleScroll(document.querySelectorAll('.out__story-wrap'));
+    handleScroll(document.querySelectorAll('.out__story-img'));
+    handleScroll(document.querySelectorAll('.about__introduce-wrap'));
+    handleScroll(document.querySelectorAll('.about__introduce-img-wrap'));
+    handleScroll(document.querySelectorAll('.about__story-img-wrap'));
+    handleScroll(document.querySelectorAll('.about__story-wrap'));
+    handleScroll(document.querySelectorAll('.about__teams-wrap'));
 })();
