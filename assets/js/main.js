@@ -832,4 +832,6 @@
     handleScroll(document.querySelectorAll('.about__teams-wrap'));
     handleScroll(document.querySelectorAll('.room__meeting-floor-wrap'));
     handleScroll(document.querySelectorAll('.room__meeting-floor-img'));
+    handleScroll(document.querySelectorAll('.experiences__wrap-img'));
+    handleScroll(document.querySelectorAll('.experiences__wrap-text'));
 })();
