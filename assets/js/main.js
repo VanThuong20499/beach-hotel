@@ -11,7 +11,6 @@
         for(var i=0; i<menuItems.length; i++){
             menuItems[i].addEventListener('click', function(){
                 const menuItemChildren = this.querySelector('.menu__item-childrens');
-                console.log(menuItemChildren.clientHeight)
                 for (var i = 0; i < menuItems.length; i++) {
                     menuItems[i].setAttribute('style', `height: ${this.clientHeight}px`);
                 }
@@ -24,6 +23,8 @@
                             menuItems[i].setAttribute('style', `height: 30px`);
                         }
                     }
+                }else{
+                    window.location.href = '../../../../index.html';
                 }
             })
         }
