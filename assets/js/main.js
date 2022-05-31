@@ -11,12 +11,13 @@
         for(var i=0; i<menuItems.length; i++){
             menuItems[i].addEventListener('click', function(){
                 const menuItemChildren = this.querySelector('.menu__item-childrens');
+                console.log(menuItemChildren.clientHeight)
                 for (var i = 0; i < menuItems.length; i++) {
                     menuItems[i].setAttribute('style', `height: ${this.clientHeight}px`);
                 }
                 if (menuItemChildren) {
                     if(this.clientHeight < menuItemChildren.clientHeight){
-                        this.setAttribute('style', `height: ${this.clientHeight + menuItemChildren.clientHeight + 30}px`);
+                        this.setAttribute('style', `height: ${this.clientHeight + menuItemChildren.clientHeight}px`);
                     }
                     if (this.clientHeight > 30) {
                         for (var i = 0; i < menuItems.length; i++) {
